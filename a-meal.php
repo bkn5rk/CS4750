@@ -8,7 +8,8 @@ $mealid=$_GET['mealid'];
 $current_meal=getOneMeal($mealid);
 $restid=$current_meal[0]['restaurant_id'];
 $current_restaurant=getOneRestaurant($restid);
-$reviews=getReviews($mealid);
+
+
 
 if ($_SERVER['REQUEST_METHOD']=='POST')
 {
@@ -25,13 +26,12 @@ if ($_SERVER['REQUEST_METHOD']=='POST')
  
 }
 
+$reviews=getReviews($mealid);
+
 
 
 
 ?>
-
-
-
 
 
 
@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST')
       <label for="">Review:</label>
       <input type="text" class="form-control" id="reviewtext" placeholder="Enter review" name="reviewtext" required>
     </div>
-    <button type="submit" class="btn btn-primary">Leave a review</button>
+    <input type="submit" name="addReviewBtn" class="btn btn-primary" value="Leave a review" />
   </form>
          
   <table class="table table-hover">
@@ -82,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST')
      <td><?php echo $rev['review_text']; ?></td>
      <td>
      <form method="post">
-      <input type="submit" value="Delete" name="deleteReviewBtn" class ="btn btn-danger" />
+      <input type="submit" value="Delete" name="deleteReviewBtn" class="btn btn-danger" />
       <input type="hidden" name="reviewid_to_delete" value="<?php echo $rev['review_id']; ?>"/>
 </form>
     </td>                     
