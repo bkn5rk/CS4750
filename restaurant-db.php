@@ -79,6 +79,63 @@ function getReviews($mealid)
 }
 
 
+function addReview($reviewrating, $reviewtext, $mealid, $restid, $userid)
+{
+    global $db;
+    $query="select count(*) as numrevs from review";
+    $statement=$db->prepare($query);
+    $statement->execute();
+    $numrevs=$statement->fetchAll();
+    $statement->closeCursor();
+
+    $query="insert into review values (:userid, :reviewid, :reviewrating, :reviewtext)";
+    $statement=$db->prepare($query);
+    $statement->bindValue(':userid', $userid);
+    $statement->bindValue(':reviewid', $numrevs[0]['numrevs']);
+    $statement->bindValue(':reviewrating', $reviewrating);
+    $statement->bindValue(':reviewtext', $reviewtext);
+    $statement->execute();
+   $statement->closeCursor();
+
+   $query="insert into Has values (:userid, :reviewid, :mealid, :restid)";
+    $statement=$db->prepare($query);
+    $statement->bindValue(':userid', $userid);
+    $statement->bindValue(':reviewid', $numrevs[0]['numrevs']);
+    $statement->bindValue(':mealid', $mealid);
+    $statement->bindValue(':restid', $restid);
+    $statement->execute();
+   $statement->closeCursor();
+
+
+   
+}
+
+function deleteReview($reviewid)
+{
+    global $db;
+    $query="delete from Has where review_id=:reviewid";
+    $statement=$db->prepare($query);
+    $statement->bindValue(':reviewid', $reviewid);
+    $statement->execute();
+
+   $statement->closeCursor();
+   global $db;
+   $query="delete from review where review_id=:reviewid";
+   $statement=$db->prepare($query);
+   $statement->bindValue(':reviewid', $reviewid);
+   $statement->execute();
+
+  $statement->closeCursor();
+}
+
+
+
+
+
+
+
+
+
 
 
 
