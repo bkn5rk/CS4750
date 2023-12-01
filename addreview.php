@@ -10,12 +10,13 @@ $restid=$current_meal[0]['restaurant_id'];
 $current_restaurant=getOneRestaurant($restid);
 $reviews=getReviews($mealid);
 
+
+
 if ($_SERVER['REQUEST_METHOD']=='POST')
 {
-  if (!empty($_POST['deleteReviewBtn']))
+  if (!empty($_POST['addReviewBtn']))
   {
-    deleteReview($_POST['reviewid_to_delete']);
-    $reviews=getReviews($mealid);
+    addReview($_POST['reviewrating'], $_POST['reviewtext'], $mealid, $restid, 41);
   }
  
 }
@@ -23,17 +24,11 @@ if ($_SERVER['REQUEST_METHOD']=='POST')
 
 
 
+
 ?>
 
-
-
-
-
-
-
-
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <title>Restaurants</title>
   <meta charset="utf-8">
@@ -42,8 +37,8 @@ if ($_SERVER['REQUEST_METHOD']=='POST')
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
-<body>
 
+<body>
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -65,36 +60,29 @@ if ($_SERVER['REQUEST_METHOD']=='POST')
 
 
 <div class="container">
-  <h2><?php echo $current_meal[0]['meal_name'] . " - " . $current_restaurant[0]['rest_name']; ?></h2>
-  <h4><?php echo "$" . $current_meal[0]['price']; ?></h4>
-    <h5><?php echo $current_meal[0]['description']; ?></h5>
-    <a href="https://www.cs.virginia.edu/~mec5fy/CS4750/addreview.php?mealid=<?php echo $mealid; ?>" class="btn" style="background-color:#33C5FF; border-color:black; color: black; height:40px;width:120px;" >Add Review</a>
+  <h1>Add A Review - <?php echo $current_meal[0]['meal_name']; ?></h1> 
 
-
-         
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>Rating</th>
-        <th>Review</th>
-      </tr>
-    </thead>
-    <tbody>
-    <?php foreach ($reviews as $rev): ?>
-  <tr>
-     <td><?php echo $rev['rating']; ?></td>
-     <td><?php echo $rev['review_text']; ?></td>
-     <td>
-     <form method="post">
-      <input type="submit" value="Delete" name="deleteReviewBtn" class ="btn btn-danger" />
-      <input type="hidden" name="reviewid_to_delete" value="<?php echo $rev['review_id']; ?>"/>
-</form>
-    </td>                     
-  </tr>
-<?php endforeach; ?>
-    </tbody>
-  </table>
-</div>
-
+  <!-- <a href="simpleform.php">Click to open the next page</a> -->
+ 
+  <form name="mainForm" method="post">   
+      <div class="row mb-3 mx-3">
+        Rating (1-5):
+        <input type="number" class="form-control" name="reviewrating" required 
+        />        
+      </div>  
+      <div class="row mb-3 mx-3">
+        Review:
+        <input type="text" class="form-control" name="reviewtext" required 
+        />        
+      </div>  
+      <div class="row mb-3 mx-3">
+        <input type="submit" value="Add review" name="addReviewBtn" 
+                class="btn" style="background-color:#33C5FF; border-color:black; height:50px;width:150px; margin-top:5px;" title="Insert a review" />
+      </div>  
+    </form> 
+    
+     
+  
+</div>    
 </body>
 </html>
