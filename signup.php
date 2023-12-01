@@ -10,6 +10,8 @@
 </head>
 <body>
 
+<?php $currentPage='signup'; include('navbar.php'); ?>
+
 <div class="container">
   <h2>Profile Form</h2>
   <form action="/action_page.php">

@@ -1,3 +1,24 @@
+<?php
+require("connect-db.php");
+// include("connect-db.php");
+
+require("restaurant-db.php");
+$list_of_restaurants = getAllRestaurants();
+
+
+
+
+
+
+?>
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +31,8 @@
 </head>
 <body>
 
+<?php $currentPage='restaurants'; include('navbar.php'); ?>
+
 <div class="container">
   <h2>Restaurants List</h2>
   <p>The restaurants in the database are listed below:</p>            
@@ -19,21 +42,28 @@
         <th>Name</th>
         <th>Location</th>
         <th>Category</th>
-	<th>Owner</th>
-	<th>Reviews</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>Afghan Kabob</td>
-        <td>400 Emmet St</td>
-	<td>category here</td>
-        <td>Owner</td>
-	<td>link to reviews (populate table)</td>
-      </tr>
+    <?php foreach ($list_of_restaurants as $restaurant): ?>
+  <tr>
+     <td><a href="/CS4750/a-restaurant.php?restid=<?php echo $restaurant['restaurant_id']; ?>"><?php echo $restaurant['rest_name']; ?> </a></td>
+     <td><?php echo $restaurant['location']; ?></td>
+     <td><?php 
+            $rest_categories=getCategories($restaurant['restaurant_id']); 
+            $categories = [];
+            foreach($rest_categories as $category) {
+              $categories[] = $category['category'];
+            }
+            echo join(', ', $categories); 
+          ?></td>
+
+  </tr>
+<?php endforeach; ?>
     </tbody>
   </table>
 </div>
 
 </body>
 </html>
+
