@@ -36,30 +36,24 @@ $reviews=getReviews($mealid);
 </head>
 <body>
 
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">WebSiteName</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="https://www.cs.virginia.edu/~mec5fy/CS4750/homepage.php">Home</a></li>
-      <li><a href="https://www.cs.virginia.edu/~mec5fy/CS4750/restaurants.php">Restaurants</a></li>
-      <li><a href="#">Menus</a></li>
-      <li><a href="#">Profile</a></li>
-      <li><a href="#">Reviews</a></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li><a href="https://www.cs.virginia.edu/~mec5fy/CS4750/signup.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-    </ul>
-  </div>
-</nav>
-
+<?php $currentPage='restaurants'; include('navbar.php'); ?>
 
 <div class="container">
   <h2><?php echo $current_meal[0]['meal_name'] . " - " . $current_restaurant[0]['rest_name']; ?></h2>
-  <h4><?php echo "$" . $current_meal[0]['price']; ?></h4>
+  <h4><?php echo "$" . number_format($current_meal[0]['price'], 2, '.', ','); ?></h4>
     <h5><?php echo $current_meal[0]['description']; ?></h5>
+
+  <form action="/action_page.php" method="post">
+    <div class="form-group">
+      <label for="rating">Rating:</label>
+      <input type="number" class="form-control" id="rating" placeholder="Enter rating (1-10)" name="rating" min="1" max="10" required>
+    </div>
+    <div class="form-group">
+      <label for="">Review:</label>
+      <input type="text" class="form-control" id="review" placeholder="Enter review" name="review" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Leave a review</button>
+  </form>
          
   <table class="table table-hover">
     <thead>

@@ -34,32 +34,14 @@ $rest_meals=getRestMeals($restid);
 </head>
 <body>
 
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">WebSiteName</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="https://www.cs.virginia.edu/~mec5fy/CS4750/homepage.php">Home</a></li>
-      <li><a href="https://www.cs.virginia.edu/~mec5fy/CS4750/restaurants.php">Restaurants</a></li>
-      <li><a href="#">Menus</a></li>
-      <li><a href="#">Profile</a></li>
-      <li><a href="#">Reviews</a></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li><a href="https://www.cs.virginia.edu/~mec5fy/CS4750/signup.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-    </ul>
-  </div>
-</nav>
-
+<?php $currentPage='restaurants'; include('navbar.php'); ?>
 
 <div class="container">
   <h2><?php echo $current_restaurant[0]['rest_name']; ?></h2>
   <h4><?php echo $current_restaurant[0]['location']; ?></h4>
   <?php foreach ($rest_categories as $category): ?>
     <h5><?php echo $category['category']; ?></h5>
-<?php endforeach; ?>            
+  <?php endforeach; ?>            
   <table class="table table-hover">
     <thead>
       <tr>
@@ -71,8 +53,8 @@ $rest_meals=getRestMeals($restid);
     <tbody>
     <?php foreach ($rest_meals as $meal): ?>
   <tr>
-     <td><a href="https://www.cs.virginia.edu/~mec5fy/CS4750/a-meal.php?mealid=<?php echo $meal['meal_id']; ?>"><?php echo $meal['meal_name']; ?></a></td>
-     <td><?php echo "$" . $meal['price']; ?></td>
+     <td><a href="/CS4750/a-meal.php?mealid=<?php echo $meal['meal_id']; ?>"><?php echo $meal['meal_name']; ?></a></td>
+     <td><?php echo "$" . number_format($meal['price'], 2, '.', ','); ?></td>
      <td><?php echo $meal['description']; ?></td>                     
   </tr>
 <?php endforeach; ?>
