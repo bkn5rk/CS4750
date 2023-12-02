@@ -11,6 +11,7 @@
 <body>
 
 <?php $currentPage='login'; include('navbar.php'); ?>
+
 <?php
 require("connect-db.php");
 // include("connect-db.php");
@@ -21,6 +22,7 @@ require("restaurant-db.php");
 <div class="container">
   <h2>Profile Form</h2>
   <form action="/CS4750/loginp2.php" method = "POST">
+
     <div class="form-group">
       <label for="name">Name:</label>
       <input type="name" class="form-control" id="name" placeholder="Enter name" name="name">
