@@ -1,23 +1,36 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
+  <title>Login</title>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">    
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />    
-  <title>Home Page</title>    
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 
 <body>
 
-<?php echo "Welcome to the restaurant database."; ?>
+<?php $currentPage='profile'; 
+session_start();
 
-<?php echo "Profile"; ?>
+if (!isset($_SESSION['username']) || $_SESSION['username'] == ''){
+  include('navbar.php'); 
+}
+else{
+  include('navbar_loggedin.php');}
 
-<?php echo "Restaurants"; ?>
+  require("connect-db.php");
+// include("connect-db.php");
 
-<?php echo "Reviews"; ?>
+require("restaurant-db.php");
 
-<?php echo "Menus"; ?>
+var_dump($_SESSION);
+$user = getOneProfileWithID($_SESSION['id']);
+echo $user[0]['name'];
+echo $user[0]['email'];  
+var_dump($user);
+?>
+<input type="submit" value="Update" class="btn btn-secondary" />
 </body>
 </html> 

@@ -1,4 +1,5 @@
 <?php
+session_start();
 require("connect-db.php");
 // include("connect-db.php");
 
@@ -34,7 +35,13 @@ $rest_meals=getRestMeals($restid);
 </head>
 <body>
 
-<?php $currentPage='restaurants'; include('navbar.php'); ?>
+<?php $currentPage='restaurants'; 
+if (!isset($_SESSION['username']) || $_SESSION['username'] == ''){
+  include('navbar.php'); 
+}
+else{
+  include('navbar_loggedin.php');}
+?>
 
 <div class="container">
   <h2><?php echo $current_restaurant[0]['rest_name']; ?></h2>

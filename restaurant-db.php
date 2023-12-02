@@ -128,8 +128,30 @@ function deleteReview($reviewid)
   $statement->closeCursor();
 }
 
+function getOneProfile($name, $email, $password)
+{
+    global $db;
+    $query="select * from Users where name = :name and email = :email and passwords = :password ";
+    $statement=$db->prepare($query);
+    $statement->bindValue(':name', $name);
+    $statement->bindValue(':email', $email);
+    $statement->bindValue(':password', $password);
+    $statement->execute();
+    $results=$statement->fetchAll();
+    $statement->closeCursor();
+    return $results;
+}
 
-
+function getOneProfileWithID($id)
+{
+    global $db;
+    $query="select * from Users where user_id = :id";
+    $statement=$db->prepare($query);
+    $statement->execute();
+    $results=$statement->fetchAll();
+    $statement->closeCursor();
+    return $results;
+}
 
 
 

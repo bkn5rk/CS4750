@@ -9,11 +9,22 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
+<?php
+  session_start();
+#var_dump($_SESSION);
+?>
 
-<?php $currentPage='home'; include('navbar.php'); ?>
+<?php $currentPage='home'; 
+if (!isset($_SESSION['username']) || $_SESSION['username'] == ''){
+  include('navbar.php'); 
+}
+else{
+  include('navbar_loggedin.php');}
+  ?>
 
 <div class="container">
   <h2>Welcome to our restaurant database!</h2>
+
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
