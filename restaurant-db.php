@@ -82,16 +82,17 @@ function getReviews($mealid)
 function addReview($reviewrating, $reviewtext, $mealid, $restid, $userid)
 {
     global $db;
-    $query="select count(*) as numrevs from review";
+    $query="select max(review_id) + 1 as maxid from review";
     $statement=$db->prepare($query);
     $statement->execute();
     $numrevs=$statement->fetchAll();
     $statement->closeCursor();
 
+
     $query="insert into review values (:userid, :reviewid, :reviewrating, :reviewtext)";
     $statement=$db->prepare($query);
     $statement->bindValue(':userid', $userid);
-    $statement->bindValue(':reviewid', $numrevs[0]['numrevs']);
+    $statement->bindValue(':reviewid', $numrevs[0]['maxid']);
     $statement->bindValue(':reviewrating', $reviewrating);
     $statement->bindValue(':reviewtext', $reviewtext);
     $statement->execute();
@@ -100,14 +101,12 @@ function addReview($reviewrating, $reviewtext, $mealid, $restid, $userid)
    $query="insert into Has values (:userid, :reviewid, :mealid, :restid)";
     $statement=$db->prepare($query);
     $statement->bindValue(':userid', $userid);
-    $statement->bindValue(':reviewid', $numrevs[0]['numrevs']);
+    $statement->bindValue(':reviewid', $numrevs[0]['maxid']);
     $statement->bindValue(':mealid', $mealid);
     $statement->bindValue(':restid', $restid);
     $statement->execute();
    $statement->closeCursor();
 
-
-   
 }
 
 function deleteReview($reviewid)
@@ -152,6 +151,20 @@ function getOneProfileWithID($user_id)
     $results=$statement->fetchAll();
     $statement->closeCursor();
     return $results;
+}
+
+function updateReview($reviewrating, $reviewtext, $revid)
+{
+    global $db;
+    $query="update review set rating=:rating, review_text=:review_text where review_id=:review_id";
+    $statement=$db->prepare($query);
+    $statement->bindValue(':rating', $reviewrating);
+    $statement->bindValue(':review_text', $reviewtext);
+    $statement->bindValue(':review_id', $revid);
+    
+    $statement->execute();
+
+   $statement->closeCursor();
 }
 
 
