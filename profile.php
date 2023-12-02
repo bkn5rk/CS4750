@@ -29,6 +29,7 @@ $user_id = ($_SESSION['id']);
 $user = getOneProfileWithID($user_id);
 echo $user[0]['name'];
 echo $user[0]['email'];  
+
 ?>
 <input type="submit" value="Update" class="btn btn-secondary" />
 </body>
