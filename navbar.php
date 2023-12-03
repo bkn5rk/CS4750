@@ -6,11 +6,9 @@
     <ul class="nav navbar-nav">
       <li <?php if ($currentPage === 'home') {echo 'class="active"';} ?>><a href="/CS4750/homepage.php">Home</a></li>
       <li <?php if ($currentPage === 'restaurants') {echo 'class="active"';} ?>><a href="/CS4750/restaurants.php">Restaurants</a></li>
-      <li><a href="#">Menus</a></li>
       <li <?php if ($currentPage === 'profile') {echo 'class="active"';} ?>>
         <a href=<?php if ($loggedIn) echo '"/CS4750/profile.php"'; else echo '"/CS4750/login.php"';?>>Profile</a>
       </li>
-      <li><a href="#">Reviews</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <?php if ($loggedIn) { ?>
