@@ -84,6 +84,13 @@
             <input type="submit" value="Add new phone number" class="btn btn-info" />
           </form>
         </div>
+        <?php if (ucfirst($user_type) == "Owner"):?>
+          <div class="btn-group" role="group">
+          <form action="/CS4750/add_restaurant.php" method = "POST">
+            <input type="submit" value="Add Restaurant that you Own" class="btn btn-info" />
+          </form>
+        </div>
+        <?php endif ?>
       </div>
 
     </div>
