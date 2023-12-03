@@ -1,76 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <title>Login</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-</head>
+  <head>
+    <title>Login</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  </head>
 
-<body>
+  <body>
 
-<?php $currentPage='profile'; 
-session_start();
+  <?php $currentPage='profile'; 
+  session_start();
 
-if (!isset($_SESSION['username']) || $_SESSION['username'] == ''){
-  include('navbar.php'); 
-}
-else{
-  include('navbar_loggedin.php');}
-
-  require("connect-db.php");
-// include("connect-db.php");
-
-require("restaurant-db.php");
-
-$user_id = ($_SESSION['id']);
-$user = getOneProfileWithID($user_id);
-$phone_list = findPhone($user_id);
-?>
-<div class="container">
-
-<?php echo "Name: ". $user[0]['name']; ?>
-<br>
-
-<?php echo "Email: ". $user[0]['email']; ?>
-<br>
-
-<button onclick="myFunction()">Show</button>
-
-<div id="password", style = "display: none">
-  <?php echo "Password: ". $user[0]['passwords'];  ?>
-</div>
-<script>
-  function myFunction() {
-  var x = document.getElementById("password");
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
+  if (!isset($_SESSION['username']) || $_SESSION['username'] == ''){
+    include('navbar.php'); 
   }
-}
-</script>
-<br>
-<?php foreach ($phone_list as $phone): ?>
- <tr>
- <td><?php echo "phone number: ". $phone['phone_number']; ?></td>
- <br>
-</tr>
-<?php endforeach; ?>   
+  else{
+    include('navbar_loggedin.php');}
 
+    require("connect-db.php");
+  // include("connect-db.php");
 
-</div>
+  require("restaurant-db.php");
 
-<form action="/CS4750/update.php" method = "POST">
-<input type="submit" value="Update Profile" class="btn btn-secondary" />
-</form>
-<form action="/CS4750/update_phone.php" method = "POST">
-<input type="submit" value="Update Phone" class="btn btn-secondary" />
-</form>
-<form action="/CS4750/add_phone.php" method = "POST">
-<input type="submit" value="add new Phone number" class="btn btn-secondary" />
-</form>
-</body>
+  $user_id = ($_SESSION['id']);
+  $user = getOneProfileWithID($user_id);
+  $phone_list = findPhone($user_id);
+  $user_type = findUserType($user_id);
+  ?>
+
+    <div class="container">
+
+      <h1><?php echo $user[0]['name'] . "'s profile page"; ?></h1>
+      <hr>
+
+      <h3><?php echo ucfirst($user_type); ?> profile</h3>
+
+      <h5><?php echo "Email: ". $user[0]['email']; ?></h5>
+
+      <h5>Password: </h5>
+      <div id="password", style="display: none">
+        <?php echo $user[0]['passwords'];  ?>
+      </div>
+      <button id="showPwdButton" onclick="myFunction()" class="btn btn-info">Show</button>
+
+      <script>
+        function myFunction() {
+        var x = document.getElementById("password");
+        if (x.style.display === "none") {
+          x.style.display = "block";
+          document.querySelector("#showPwdButton").innerHTML = "Hide";
+        } else {
+          x.style.display = "none";
+          document.querySelector("#showPwdButton").innerHTML = "Show";
+        }
+      }
+      </script>
+      <br>
+
+      <?php foreach ($phone_list as $phone): ?>
+        <tr>
+          <td><h5><?php echo "Phone number: ". $phone['phone_number']; ?></h5></td>
+        <br>
+        </tr>
+      <?php endforeach; ?>   
+      
+      <hr>
+
+      <h3>Edit profile</h3>
+
+      <div class="btn-toolbar" role="toolbar">
+        <div class="btn-group" role="group">
+          <form action="/CS4750/update.php" method = "POST">
+            <input type="submit" value="Update profile" class="btn btn-info" />
+          </form>
+        </div>
+        <div class="btn-group" role="group">
+          <form action="/CS4750/update_phone.php" method = "POST">
+            <input type="submit" value="Update phone" class="btn btn-info" />
+          </form>
+        </div>
+        <div class="btn-group" role="group">
+          <form action="/CS4750/add_phone.php" method = "POST">
+            <input type="submit" value="Add new phone number" class="btn btn-info" />
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </body>
 </html> 

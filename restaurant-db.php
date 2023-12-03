@@ -257,7 +257,29 @@ function findPhone($user_id){
     return $results;
 }
 
+function findUserType($user_id) {
+    global $db;
+    $owner_query = "select * from owner where user_id = :user_id";
+    $owner_statement = $db->prepare($owner_query);
+    $owner_statement->bindValue(":user_id", $user_id);
+    $owner_statement->execute();
+    $owner_results = $owner_statement->fetchAll();
+    $owner_statement->closeCursor();
+    
+    $customer_query = "select * from customer where user_id = :user_id";
+    $customer_statement = $db->prepare($customer_query);
+    $customer_statement->bindValue(":user_id", $user_id);
+    $customer_statement->execute();
+    $customer_results = $customer_statement->fetchAll();
+    $customer_statement->closeCursor();
 
+    if (count($owner_results) > 0) {
+        return "owner";
+    }
+    if (count($customer_results) > 0) {
+        return "customer";
+    }
+}
 
 
 

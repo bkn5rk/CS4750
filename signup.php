@@ -29,7 +29,7 @@
     </div>
     <div class="form-group">
       <label for="phone_number">Phone Number:</label>
-      <input type="phone_number" class="form-control" id="phone_number" placeholder="Enter phone_number" name="phone_number">
+      <input type="phone_number" class="form-control" id="phone_number" placeholder="Enter phone number" name="phone_number">
     </div>
     <div class="form-group">
     <label for="User Type">Choose a User Type:</label>
