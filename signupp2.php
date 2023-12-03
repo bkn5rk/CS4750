@@ -11,14 +11,11 @@
 
 <body>
   
-<?php $currentPage='singupp2'; 
+<?php 
+$currentPage='singupp2'; 
 session_start();
-
-if (!isset($_SESSION['username']) || $_SESSION['username'] == ''){
-  include('navbar.php'); 
-}
-else{
-  include('navbar_loggedin.php');}
+$loggedIn = isset($_SESSION['username']) && $_SESSION['username'] != '';
+include('navbar.php'); 
 ?>
 <?php
 require("connect-db.php");

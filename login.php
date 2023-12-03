@@ -10,7 +10,8 @@
 </head>
 <body>
 
-<?php $currentPage='login'; include('navbar.php'); ?>
+<?php $currentPage='login'; $loggedIn = isset($_SESSION['username']) && $_SESSION['username'] != '';
+include('navbar.php');  ?>
 <?php
 require("connect-db.php");
 // include("connect-db.php");

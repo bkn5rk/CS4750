@@ -32,12 +32,10 @@ $list_of_restaurants = getAllRestaurants();
 </head>
 <body>
 
-<?php $currentPage='restaurants'; 
-if (!isset($_SESSION['username']) || $_SESSION['username'] == ''){
-  include('navbar.php'); 
-}
-else{
-  include('navbar_loggedin.php');}
+<?php 
+$currentPage = 'restaurants'; 
+$loggedIn = isset($_SESSION['username']) && $_SESSION['username'] != '';
+include('navbar.php'); 
 ?>
 
 <div class="container">

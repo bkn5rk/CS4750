@@ -11,14 +11,11 @@
 
   <body>
 
-  <?php $currentPage='profile'; 
+  <?php 
+  $currentPage='profile'; 
   session_start();
-
-  if (!isset($_SESSION['username']) || $_SESSION['username'] == ''){
-    include('navbar.php'); 
-  }
-  else{
-    include('navbar_loggedin.php');}
+  $loggedIn = isset($_SESSION['username']) && $_SESSION['username'] != '';
+  include('navbar.php'); 
 
     require("connect-db.php");
   // include("connect-db.php");

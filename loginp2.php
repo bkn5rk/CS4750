@@ -12,11 +12,8 @@
 <body>
 
 <?php $currentPage='profile'; 
-if (!isset($_SESSION['username']) || $_SESSION['username'] == ''){
-  include('navbar.php'); 
-}
-else{
-  include('navbar_loggedin.php');}
+$loggedIn = isset($_SESSION['username']) && $_SESSION['username'] != '';
+include('navbar.php'); 
 ?>
 <?php
 require("connect-db.php");

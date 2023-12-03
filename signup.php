@@ -10,7 +10,10 @@
 </head>
 <body>
 
-<?php $currentPage='signup'; include('navbar.php'); ?>
+<?php 
+$currentPage='signup'; 
+$loggedIn = isset($_SESSION['username']) && $_SESSION['username'] != '';
+include('navbar.php');  ?>
 
 <div class="container">
   <h2>Signup Form</h2>

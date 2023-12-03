@@ -68,7 +68,7 @@ function getRestMeals($restid)
 function getReviews($mealid)
 {
     global $db;
-    $query="select * from review natural join Has where meal_id = :mealid";
+    $query="select * from review natural join Has natural join Users where meal_id = :mealid";
     $statement=$db->prepare($query);
     $statement->bindValue(':mealid', $mealid);
     $statement->execute();
