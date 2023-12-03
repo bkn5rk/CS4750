@@ -40,6 +40,10 @@ include('navbar.php');
 
 <div class="container">
   <h2>Restaurants List</h2>
+  <p>Type a name in the input field to search for a specific restaurant:</p>
+  <input class="form-control" id="myInput" type="text" placeholder="Search..">
+  <br>
+  <div id="myDIV">
   <?php echo $_SESSION['username']; ?>
   <p>The restaurants in the database are listed below:</p>            
   <table class="table table-hover">
@@ -69,6 +73,18 @@ include('navbar.php');
     </tbody>
   </table>
 </div>
+</div>
+
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myDIV *").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
 
 </body>
 </html>
