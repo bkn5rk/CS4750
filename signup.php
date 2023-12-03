@@ -13,8 +13,8 @@
 <?php $currentPage='signup'; include('navbar.php'); ?>
 
 <div class="container">
-  <h2>Profile Form</h2>
-  <form action="/action_page.php">
+  <h2>Signup Form</h2>
+  <form action="/CS4750/signupp2.php" method = "POST">
     <div class="form-group">
       <label for="name">Name:</label>
       <input type="name" class="form-control" id="name" placeholder="Enter name" name="name">
@@ -27,9 +27,17 @@
       <label for="pwd">Password:</label>
       <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
     </div>
-    <div class="checkbox">
-      <label><input type="checkbox" name="remember"> Remember me</label>
+    <div class="form-group">
+      <label for="phone_number">Phone Number:</label>
+      <input type="phone_number" class="form-control" id="phone_number" placeholder="Enter phone_number" name="phone_number">
     </div>
+    <div class="form-group">
+    <label for="User Type">Choose a User Type:</label>
+      <select id="type" name="type">
+      <option value="Customer">Customer</option>
+      <option value="Owner">Owner</option>
+      </select>
+      </div>
     <button type="submit" class="btn btn-default">Submit</button>
   </form>
 </div>

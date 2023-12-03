@@ -171,9 +171,63 @@ function updateProfile($user_id, $name, $email, $passwords)
     $statement->closeCursor();
     return $results;
 }
+function findUserNum(){
+    global $db;
+    $query="select count(*) as num from Users";
+    $statement=$db->prepare($query);
+    $statement->execute();
+    $results=$statement->fetchAll();
+    $statement->closeCursor();
+    return $results;
+}
 
+function addUser($user_id, $name, $email, $passwords)
+{
+    global $db;
+    $query="insert into Users values (:user_id, :name, :email, :passwords)";
+    $statement=$db->prepare($query);
+    $statement->bindValue(':user_id', $user_id);
+    $statement->bindValue(':name', $name);
+    $statement->bindValue(':email', $email);
+    $statement->bindValue(':passwords', $passwords);
+    if (!$statement->execute()) {
+        // Display or log the error
+        die("Database update failed: " . $statement->errorInfo()[2]);
+    }
+    $results= "updated successfully";
+    $statement->closeCursor();
+    return $results;
+}
 
+function addUserType($user_id, $type)
+{
+    global $db;
+    if ($type == "Owner"){
+    $query="insert into owner values (:user_id)";
+    $statement=$db->prepare($query);
+    $statement->bindValue(':user_id', $user_id);
+    $statement->execute();
+    $statement->closeCursor();
+    }
+    else{
+        $query="insert into customer values (:user_id)";
+        $statement=$db->prepare($query);
+        $statement->bindValue(':user_id', $user_id);
+        $statement->execute();
+       $statement->closeCursor();
+    }
+}
 
+function addPhoneNumber($user_id, $phone_number)
+{
+    global $db;
+    $query="insert into Users_phones values (:user_id, :phone_number)";
+    $statement=$db->prepare($query);
+    $statement->bindValue(':user_id', $user_id);
+    $statement->bindValue(':phone_number', $phone_number);
+    $statement->execute();
+   $statement->closeCursor();
+}
 
 
 
