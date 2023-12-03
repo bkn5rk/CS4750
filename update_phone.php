@@ -25,9 +25,20 @@ else{
 require("restaurant-db.php");
 #var_dump($_SESSION);
 
+$phone_list = findPhone($_SESSION['id']);
+
+
 ?>
 <div class="container">
   <h2>Update Phone Form</h2>
+  <body> Your phone numbers </body>
+  <br>
+    <?php foreach ($phone_list as $phone): ?>
+    <tr>
+    <td><?php echo "phone number: ". $phone['phone_number']; ?></td>
+    <br>
+    </tr>
+    <?php endforeach; ?> 
   <form action="/CS4750/update_phonep2.php" method = "POST">
     <div class="form-group">
       <label for="name">old phone_number:</label>

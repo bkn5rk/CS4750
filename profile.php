@@ -37,7 +37,7 @@ $phone_list = findPhone($user_id);
 <?php echo "Email: ". $user[0]['email']; ?>
 <br>
 
-<button onclick="myFunction()">Show Password</button>
+<button onclick="myFunction()">Show</button>
 
 <div id="password", style = "display: none">
   <?php echo "Password: ". $user[0]['passwords'];  ?>
