@@ -1,4 +1,5 @@
 <?php
+session_start();
 require("connect-db.php");
 // include("connect-db.php");
 
@@ -49,7 +50,11 @@ $reviews=getReviews($mealid);
 </head>
 <body>
 
-<?php $currentPage='restaurants'; include('navbar.php'); ?>
+<?php 
+$currentPage='restaurants'; 
+$loggedIn = isset($_SESSION['username']) && $_SESSION['username'] != '';
+include('navbar.php'); 
+?>
 
 <div class="container">
   <h2><?php echo $current_meal[0]['meal_name'] . " - " . $current_restaurant[0]['rest_name']; ?></h2>
@@ -71,6 +76,7 @@ $reviews=getReviews($mealid);
   <table class="table table-hover">
     <thead>
       <tr>
+        <th>Name</th>
         <th>Rating</th>
         <th>Review</th>
       </tr>
@@ -78,6 +84,7 @@ $reviews=getReviews($mealid);
     <tbody>
     <?php foreach ($reviews as $rev): ?>
   <tr>
+     <td><?php echo $rev['name']; ?></td>
      <td><?php echo $rev['rating']; ?></td>
      <td><?php echo $rev['review_text']; ?></td>
      <td>

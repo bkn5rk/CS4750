@@ -1,4 +1,5 @@
 <?php
+session_start();
 require("connect-db.php");
 // include("connect-db.php");
 
@@ -31,10 +32,15 @@ $list_of_restaurants = getAllRestaurants();
 </head>
 <body>
 
-<?php $currentPage='restaurants'; include('navbar.php'); ?>
+<?php 
+$currentPage = 'restaurants'; 
+$loggedIn = isset($_SESSION['username']) && $_SESSION['username'] != '';
+include('navbar.php'); 
+?>
 
 <div class="container">
   <h2>Restaurants List</h2>
+  <?php echo $_SESSION['username']; ?>
   <p>The restaurants in the database are listed below:</p>            
   <table class="table table-hover">
     <thead>
