@@ -12,7 +12,7 @@
 <body>
   
 <?php 
-$currentPage='singupp2'; 
+$currentPage='signupp2'; 
 session_start();
 $loggedIn = isset($_SESSION['username']) && $_SESSION['username'] != '';
 include('navbar.php'); 
@@ -27,7 +27,8 @@ $user_id = findUserNum();
 $num = $user_id[0]['num'] + 1;
 addUser($num, $_POST['name'], $_POST['email'], $_POST['pwd']);
 
-$user = getOneProfile($_POST['name'], $_POST['email'], $_POST['pwd']);
+
+$user = getOneProfile($_POST['email'], $_POST['pwd']);
 
 #var_dump($user);
 #echo $_POST['type'];

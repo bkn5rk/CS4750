@@ -20,12 +20,11 @@ require("restaurant-db.php");
 ?>
 
 <div class="container">
-  <h2>Profile Form</h2>
+  <h2>Login</h2>
+  <?php if ($_GET['success'] === 'false') { ?>
+    <p style="color:red">We could not find an account with the given login information.</p>
+  <?php } ?>
   <form action="/CS4750/loginp2.php" method = "POST">
-    <div class="form-group">
-      <label for="name">Name:</label>
-      <input type="name" class="form-control" id="name" placeholder="Enter name" name="name">
-    </div>
     <div class="form-group">
       <label for="email">Email:</label>
       <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">

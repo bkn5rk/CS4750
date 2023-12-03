@@ -37,30 +37,9 @@
 
       <h5><?php echo "Email: ". $user[0]['email']; ?></h5>
 
-      <h5>Password: </h5>
-      <div id="password", style="display: none">
-        <?php echo $user[0]['passwords'];  ?>
-      </div>
-      <button id="showPwdButton" onclick="myFunction()" class="btn btn-info">Show</button>
-
-      <script>
-        function myFunction() {
-        var x = document.getElementById("password");
-        if (x.style.display === "none") {
-          x.style.display = "block";
-          document.querySelector("#showPwdButton").innerHTML = "Hide";
-        } else {
-          x.style.display = "none";
-          document.querySelector("#showPwdButton").innerHTML = "Show";
-        }
-      }
-      </script>
-      <br>
-
       <?php foreach ($phone_list as $phone): ?>
         <tr>
           <td><h5><?php echo "Phone number: ". $phone['phone_number']; ?></h5></td>
-        <br>
         </tr>
       <?php endforeach; ?>   
       

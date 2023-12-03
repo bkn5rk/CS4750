@@ -21,15 +21,20 @@ require("connect-db.php");
 
 require("restaurant-db.php");
 
-$user = getOneProfile($_POST['name'], $_POST['email'], $_POST['pwd']);
-session_start();
-$_SESSION['loggedin'] = true; $_SESSION['id'] = $user[0]['user_id']; $_SESSION['username'] = $user[0]['email']; 
+$user = getOneProfile($_POST['email'], $_POST['pwd']);
 
-#echo "Welcome to the restaurant databases: ";
-#echo $userid = $user[0]['name'];
-
-#var_dump($_SESSION);
-header("Location: homepage.php");
+if (count($user) === 0) {
+  header("Location: login.php?success=false");
+} else {
+  session_start();
+  $_SESSION['loggedin'] = true; $_SESSION['id'] = $user[0]['user_id']; $_SESSION['username'] = $user[0]['email']; 
+  
+  // echo "Welcome to the restaurant databases: ";
+  // echo $userid = $user[0]['name'];
+  
+  #var_dump($_SESSION);
+  header("Location: homepage.php");
+}
 ?>
 </body>
 </html> 

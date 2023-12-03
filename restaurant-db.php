@@ -127,14 +127,13 @@ function deleteReview($reviewid)
   $statement->closeCursor();
 }
 
-function getOneProfile($name, $email, $password)
+function getOneProfile($email, $password)
 {
     global $db;
-    $query="select * from Users where name = :name and email = :email and passwords = :password ";
+    $query="select * from Users where email = :email and passwords = :password ";
     $statement=$db->prepare($query);
-    $statement->bindValue(':name', $name);
     $statement->bindValue(':email', $email);
-    $statement->bindValue(':password', $password);
+    $statement->bindValue(':password', hash('sha256', $password));
     $statement->execute();
     $results=$statement->fetchAll();
     $statement->closeCursor();
@@ -235,7 +234,7 @@ function updateProfile($user_id, $name, $email, $passwords)
     $statement->bindValue(':user_id', $user_id);
     $statement->bindValue(':name', $name);
     $statement->bindValue(':email', $email);
-    $statement->bindValue(':passwords', $passwords);
+    $statement->bindValue(':passwords', hash('sha256', $passwords));
     if (!$statement->execute()) {
         // Display or log the error
         die("Database update failed: " . $statement->errorInfo()[2]);
@@ -262,7 +261,7 @@ function addUser($user_id, $name, $email, $passwords)
     $statement->bindValue(':user_id', $user_id);
     $statement->bindValue(':name', $name);
     $statement->bindValue(':email', $email);
-    $statement->bindValue(':passwords', $passwords);
+    $statement->bindValue(':passwords', hash('sha256', $passwords));
     if (!$statement->execute()) {
         // Display or log the error
         die("Database update failed: " . $statement->errorInfo()[2]);
