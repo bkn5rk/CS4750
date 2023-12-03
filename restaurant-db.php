@@ -82,16 +82,17 @@ function getReviews($mealid)
 function addReview($reviewrating, $reviewtext, $mealid, $restid, $userid)
 {
     global $db;
-    $query="select count(*) as numrevs from review";
+    $query="select max(review_id) + 1 as maxid from review";
     $statement=$db->prepare($query);
     $statement->execute();
     $numrevs=$statement->fetchAll();
     $statement->closeCursor();
 
+
     $query="insert into review values (:userid, :reviewid, :reviewrating, :reviewtext)";
     $statement=$db->prepare($query);
     $statement->bindValue(':userid', $userid);
-    $statement->bindValue(':reviewid', $numrevs[0]['numrevs']);
+    $statement->bindValue(':reviewid', $numrevs[0]['maxid']);
     $statement->bindValue(':reviewrating', $reviewrating);
     $statement->bindValue(':reviewtext', $reviewtext);
     $statement->execute();
@@ -100,14 +101,12 @@ function addReview($reviewrating, $reviewtext, $mealid, $restid, $userid)
    $query="insert into Has values (:userid, :reviewid, :mealid, :restid)";
     $statement=$db->prepare($query);
     $statement->bindValue(':userid', $userid);
-    $statement->bindValue(':reviewid', $numrevs[0]['numrevs']);
+    $statement->bindValue(':reviewid', $numrevs[0]['maxid']);
     $statement->bindValue(':mealid', $mealid);
     $statement->bindValue(':restid', $restid);
     $statement->execute();
    $statement->closeCursor();
 
-
-   
 }
 
 function deleteReview($reviewid)
@@ -152,6 +151,80 @@ function getOneProfileWithID($user_id)
     $results=$statement->fetchAll();
     $statement->closeCursor();
     return $results;
+}
+
+function updateReview($reviewrating, $reviewtext, $revid)
+{
+    global $db;
+    $query="update review set rating=:rating, review_text=:review_text where review_id=:review_id";
+    $statement=$db->prepare($query);
+    $statement->bindValue(':rating', $reviewrating);
+    $statement->bindValue(':review_text', $reviewtext);
+    $statement->bindValue(':review_id', $revid);
+    
+    $statement->execute();
+
+   $statement->closeCursor();
+}
+
+function getRestaurantOwner($restid)
+{
+    global $db;
+    $query="select * from Owns where restaurant_id = :restid";
+    $statement=$db->prepare($query);
+    $statement->bindValue(':restid', $restid);
+    $statement->execute();
+    $results=$statement->fetchAll();
+    $statement->closeCursor();
+    return $results;
+}
+
+function addMeal($mealname, $mealprice, $mealdesc, $restid)
+{
+    global $db;
+    $query="select max(meal_id) + 1 as maxid from meal";
+    $statement=$db->prepare($query);
+    $statement->execute();
+    $nummeals=$statement->fetchAll();
+    $statement->closeCursor();
+
+
+    $query="insert into meal values (:restid, :mealid, :mealprice, :mealname, :mealdesc)";
+    $statement=$db->prepare($query);
+    $statement->bindValue(':restid', $restid);
+    $statement->bindValue(':mealid', $nummeals[0]['maxid']);
+    $statement->bindValue(':mealprice', $mealprice);
+    $statement->bindValue(':mealname', $mealname);
+    $statement->bindValue(':mealdesc', $mealdesc);
+    $statement->execute();
+   $statement->closeCursor();
+}
+
+function deleteMeal($mealid)
+{
+    global $db;
+    $query="delete from meal where meal_id=:mealid";
+    $statement=$db->prepare($query);
+    $statement->bindValue(':mealid', $mealid);
+    $statement->execute();
+   $statement->closeCursor();
+   
+}
+
+function checkCus($id)
+{
+    global $db;
+    $query="select * from customer where user_id=:id";
+    $statement=$db->prepare($query);
+    $statement->bindValue(':id', $id);
+    $statement->execute();
+    $results=$statement->fetchAll();
+    $statement->closeCursor();
+    if (empty($results))
+        return false;
+    else
+        return true;
+    
 }
 
 function updateProfile($user_id, $name, $email, $passwords)
