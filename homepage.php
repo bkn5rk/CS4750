@@ -20,7 +20,7 @@ include('navbar.php');
   ?>
 
 <div class="container">
-  <h2>Welcome to our restaurant database!</h2>
+  <h2>Charlottesville Meal Review</h2>
 
   <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
@@ -36,8 +36,6 @@ include('navbar.php');
       <div class="item active">
         <img src="https://youaligned.com/wp-content/uploads/2022/05/7-healthy-food-blogs-feature.jpg" alt="Food restaurant name" style="width:100%;">
         <div class="carousel-caption">
-          <h3>food</h3>
-          <p>recommend this restaurant</p>
         </div>
       </div>
 
@@ -69,10 +67,9 @@ include('navbar.php');
   
 <div class="container">
 <div class="jumbotron">
-  <h1>Home Page</h1>
-  <p>This is a restaurant database.</p> 
+  <h1>Charlottesville Restaurant Database</h1>
+  <p>Browse and rate meals from various restaurants around Charlottesville.</p> 
   <blockquote>
-	<p>(Insert slogan here)</p>  
   </blockquote>         
 </div>
 </div>
@@ -86,7 +83,7 @@ include('navbar.php');
         <a href="https://scx2.b-cdn.net/gfx/news/2020/healthyfood.jpg" target="_blank">
           <img src="https://scx2.b-cdn.net/gfx/news/2020/healthyfood.jpg" alt="Lights" style="width:100%">
           <div class="caption">
-            <p>something restaurant</p>
+            <p></p>
           </div>
         </a>
       </div>
@@ -96,7 +93,7 @@ include('navbar.php');
         <a href="https://dining.uga.edu/_resources/images/news/plating_1.jpg" target="_blank">
           <img src="https://dining.uga.edu/_resources/images/news/plating_1.jpg" alt="Nature" style="width:100%">
           <div class="caption">
-            <p>restaurant name</p>
+            <p></p>
           </div>
         </a>
       </div>
@@ -106,7 +103,7 @@ include('navbar.php');
         <a href="https://assets.technologynetworks.com/production/dynamic/images/content/342559/why-do-consumers-perceive-pretty-food-as-being-healthier-342559-960x540.jpg?cb=10970504" target="_blank">
           <img src="https://assets.technologynetworks.com/production/dynamic/images/content/342559/why-do-consumers-perceive-pretty-food-as-being-healthier-342559-960x540.jpg?cb=10970504" alt="Fjords" style="width:100%">
           <div class="caption">
-            <p>other restaurant</p>
+            <p></p>
           </div>
         </a>
       </div>
