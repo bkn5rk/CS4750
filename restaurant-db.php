@@ -282,5 +282,18 @@ function findUserType($user_id) {
 }
 
 
+function addRestaurants($user_id, $array){
+    for ($x = 0; $x < count($array); $x++) {
+        echo $array[$x];
+        global $db;
+        $query= "insert into Owns values (:user_id, :restaurant_id)";
+        $statement = $db->prepare($query);
+        $statement->bindValue(":user_id", $user_id);
+        $statement->bindValue(":restaurant_id", $array[$x]);
+        $statement->execute();
+        $results = $statement->fetchAll();
+        $statement->closeCursor();
+    }
+}
 
 ?>
