@@ -13,6 +13,7 @@ $current_restaurant=getOneRestaurant($restid);
 
 
 
+
 if ($_SERVER['REQUEST_METHOD']=='POST')
 {
   if (!empty($_POST['addReviewBtn']))
@@ -66,7 +67,7 @@ else{
   include('navbar_loggedin.php');}
 ?>
 
-<?php if (!isset($_SESSION['username']) || $_SESSION['username'] == ''): ?>
+<?php if (!isset($_SESSION['username']) || $_SESSION['username'] == '' || checkCus($_SESSION['id'])==false): ?>
 <div class="container">
   <h2><?php echo $current_meal[0]['meal_name'] . " - " . $current_restaurant[0]['rest_name']; ?></h2>
   <h4><?php echo "$" . number_format($current_meal[0]['price'], 2, '.', ','); ?></h4>

@@ -211,7 +211,21 @@ function deleteMeal($mealid)
    
 }
 
-
+function checkCus($id)
+{
+    global $db;
+    $query="select * from customer where user_id=:id";
+    $statement=$db->prepare($query);
+    $statement->bindValue(':id', $id);
+    $statement->execute();
+    $results=$statement->fetchAll();
+    $statement->closeCursor();
+    if (empty($results))
+        return false;
+    else
+        return true;
+    
+}
 
 
 
