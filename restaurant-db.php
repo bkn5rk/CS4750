@@ -229,9 +229,33 @@ function addPhoneNumber($user_id, $phone_number)
    $statement->closeCursor();
 }
 
+function updatePhone($user_id, $phone_number, $phone_number_old)
+{
+    global $db;
+    $query = "UPDATE Users_phones SET phone_number = :phone_number WHERE user_id = :user_id and phone_number = :phone_number_old";
+    $statement = $db->prepare($query);
+    $statement->bindValue(':user_id', $user_id);
+    $statement->bindValue(':phone_number', $phone_number);
+    $statement->bindValue(':phone_number_old', $phone_number_old);
+    if (!$statement->execute()) {
+        // Display or log the error
+        die("Database update failed: " . $statement->errorInfo()[2]);
+    }
+    $results= "updated successfully";
+    $statement->closeCursor();
+    return $results;
+}
 
-
-
+function findPhone($user_id){
+    global $db;
+    $query="select * from Users_phones where user_id = :user_id";
+    $statement=$db->prepare($query);
+    $statement->bindValue(':user_id', $user_id);
+    $statement->execute();
+    $results=$statement->fetchAll();
+    $statement->closeCursor();
+    return $results;
+}
 
 
 

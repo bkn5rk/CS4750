@@ -11,7 +11,7 @@
 
 <body>
   
-<?php $currentPage='singupp2'; 
+<?php $currentPage='update_phonep2'; 
 session_start();
 
 if (!isset($_SESSION['username']) || $_SESSION['username'] == ''){
@@ -26,21 +26,12 @@ require("connect-db.php");
 
 require("restaurant-db.php");
 
-$user_id = findUserNum();
-$num = $user_id[0]['num'] + 1;
-addUser($num, $_POST['name'], $_POST['email'], $_POST['pwd']);
 
-$user = getOneProfile($_POST['name'], $_POST['email'], $_POST['pwd']);
+#var_dump($_POST);
+$user_id = ($_SESSION['id']);
 
-#var_dump($user);
-#echo $_POST['type'];
+updatePhone($user_id, $_POST['phone_number'], $_POST['phone_number_old']);
 
-addUserType($user[0]['user_id'], $_POST['type']);
-addPhoneNumber($user[0]['user_id'], $_POST['phone_number']);
-
-$_SESSION['loggedin'] = true; $_SESSION['id'] = $user[0]['user_id']; $_SESSION['username'] = $user[0]['email']; 
-
-header("Location: profile.php");
-?>
+header("Location: profile.php");?>
 </body>
 </html> 

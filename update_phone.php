@@ -27,19 +27,15 @@ require("restaurant-db.php");
 
 ?>
 <div class="container">
-  <h2>Update Form</h2>
-  <form action="/CS4750/updatep2.php" method = "POST">
+  <h2>Update Phone Form</h2>
+  <form action="/CS4750/update_phonep2.php" method = "POST">
     <div class="form-group">
-      <label for="name">Name:</label>
-      <input type="name" class="form-control" id="name" placeholder="Enter name" name="name">
+      <label for="name">old phone_number:</label>
+      <input type="phone_number_old" class="form-control" id="phone_number_old" placeholder="Enter phone_number" name="phone_number_old">
     </div>
     <div class="form-group">
-      <label for="email">Email:</label>
-      <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
-    </div>
-    <div class="form-group">
-      <label for="pwd">Password:</label>
-      <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
+      <label for="phone_number">new phone_number:</label>
+      <input type="phone_number" class="form-control" id="phone_number" placeholder="Enter phone_number" name="phone_number">
     </div>
     <button type="submit" class="btn btn-default">Submit</button>
   </form>
