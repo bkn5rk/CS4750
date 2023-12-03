@@ -11,9 +11,8 @@
 
 <body>
 
-<?php $currentPage='profile'; 
+<?php $currentPage='update'; 
 session_start();
-
 if (!isset($_SESSION['username']) || $_SESSION['username'] == ''){
   include('navbar.php'); 
 }
@@ -24,20 +23,27 @@ else{
 // include("connect-db.php");
 
 require("restaurant-db.php");
+var_dump($_SESSION);
 
-$user_id = ($_SESSION['id']);
-$user = getOneProfileWithID($user_id);
 ?>
 <div class="container">
-
-<?php echo $user[0]['name']; ?>
-<?php echo $user[0]['email']; ?>
-<?php echo $user[0]['passwords'];  ?>
-
+  <h2>Update Form</h2>
+  <form action="/CS4750/updatep2.php" method = "POST">
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input type="name" class="form-control" id="name" placeholder="Enter name" name="name">
+    </div>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+    </div>
+    <div class="form-group">
+      <label for="pwd">Password:</label>
+      <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form>
 </div>
 
-<form action="/CS4750/update.php" method = "POST">
-<input type="submit" value="Update" class="btn btn-secondary" />
-</form>
 </body>
-</html> 
+</html>

@@ -10,8 +10,8 @@
 </head>
 
 <body>
-
-<?php $currentPage='profile'; 
+  
+<?php $currentPage='updatep2'; 
 session_start();
 
 if (!isset($_SESSION['username']) || $_SESSION['username'] == ''){
@@ -19,25 +19,31 @@ if (!isset($_SESSION['username']) || $_SESSION['username'] == ''){
 }
 else{
   include('navbar_loggedin.php');}
-
-  require("connect-db.php");
+?>
+<?php
+require("connect-db.php");
 // include("connect-db.php");
 
 require("restaurant-db.php");
 
+
+#var_dump($_POST);
 $user_id = ($_SESSION['id']);
+
+echo $_SESSION['id'];
+echo $_POST['name'];
+echo $_POST['email'];
+echo $_POST['pwd'];
+
+updateProfile($user_id, $_POST['name'], $_POST['email'], $_POST['pwd']);
+
 $user = getOneProfileWithID($user_id);
+
+echo $user[0]['name'];
+echo $user[0]['email']; 
+echo $user[0]['passwords'];  
+
+header("Location: profile.php");
 ?>
-<div class="container">
-
-<?php echo $user[0]['name']; ?>
-<?php echo $user[0]['email']; ?>
-<?php echo $user[0]['passwords'];  ?>
-
-</div>
-
-<form action="/CS4750/update.php" method = "POST">
-<input type="submit" value="Update" class="btn btn-secondary" />
-</form>
 </body>
 </html> 

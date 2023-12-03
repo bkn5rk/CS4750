@@ -154,6 +154,23 @@ function getOneProfileWithID($user_id)
     return $results;
 }
 
+function updateProfile($user_id, $name, $email, $passwords)
+{
+    global $db;
+    $query = "UPDATE Users SET name = :name, email = :email, passwords = :passwords WHERE user_id = :user_id";
+    $statement = $db->prepare($query);
+    $statement->bindValue(':user_id', $user_id);
+    $statement->bindValue(':name', $name);
+    $statement->bindValue(':email', $email);
+    $statement->bindValue(':passwords', $passwords);
+    if (!$statement->execute()) {
+        // Display or log the error
+        die("Database update failed: " . $statement->errorInfo()[2]);
+    }
+    $results= "updated successfully";
+    $statement->closeCursor();
+    return $results;
+}
 
 
 
