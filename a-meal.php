@@ -59,12 +59,10 @@ $reviews=getReviews($mealid);
 </head>
 <body>
 
-<?php $currentPage='restaurants'; 
-if (!isset($_SESSION['username']) || $_SESSION['username'] == ''){
-  include('navbar.php'); 
-}
-else{
-  include('navbar_loggedin.php');}
+<?php 
+$currentPage='restaurants'; 
+$loggedIn = isset($_SESSION['username']) && $_SESSION['username'] != '';
+include('navbar.php'); 
 ?>
 
 <?php if (!isset($_SESSION['username']) || $_SESSION['username'] == '' || checkCus($_SESSION['id'])==false): ?>
@@ -101,6 +99,7 @@ else{
   <table class="table table-hover">
     <thead>
       <tr>
+        <th>Name</th>
         <th>Rating</th>
         <th>Review</th>
       </tr>
@@ -108,6 +107,7 @@ else{
     <tbody>
     <?php foreach ($reviews as $rev): ?>
   <tr>
+     <td><?php echo $rev['name']; ?></td>
      <td><?php echo $rev['rating']; ?></td>
      <td><?php echo $rev['review_text']; ?></td>
      <?php if (!isset($_SESSION['username']) || $_SESSION['username'] == ''): ?>

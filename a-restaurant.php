@@ -52,11 +52,8 @@ $rest_meals=getRestMeals($restid);
 <body>
 
 <?php $currentPage='restaurants'; 
-if (!isset($_SESSION['username']) || $_SESSION['username'] == ''){
-  include('navbar.php'); 
-}
-else{
-  include('navbar_loggedin.php');}
+$loggedIn = isset($_SESSION['username']) && $_SESSION['username'] != '';
+include('navbar.php'); 
 ?>
 
 
