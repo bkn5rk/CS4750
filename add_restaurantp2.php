@@ -28,7 +28,7 @@ var_dump($_POST);
 echo ($_POST["Own"]);
 addRestaurants($user_id, $_POST["Own"]);
 
-#header("Location: profile.php");
+header("Location: profile.php");
 ?>
 </body>
 </html> 

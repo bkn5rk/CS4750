@@ -67,7 +67,7 @@ include('navbar.php');
   
   <?php if (!isset($_SESSION['username']) || $_SESSION['username'] == ''): ?>
 
-<?php elseif ($_SESSION['id']==$current_rest_owner[0]['user_id']): ?>
+    <?php elseif (in_array($_SESSION['id'], $current_rest_owner)): ?>
   <div class="container">
 <form name="mainForm" method="post">
   <div class="form-group">
@@ -104,7 +104,7 @@ include('navbar.php');
      <td><?php echo $meal['description']; ?></td>
      <?php if (!isset($_SESSION['username']) || $_SESSION['username'] == ''): ?>
      
-     <?php elseif ($_SESSION['id']==$current_rest_owner[0]['user_id']): ?>
+        <?php elseif (in_array($_SESSION['id'], $current_rest_owner)): ?>
     <td>
     <form method="post">
      <input type="submit" value="Delete" name="deleteMealBtn" class="btn btn-danger" />

@@ -176,7 +176,11 @@ function getRestaurantOwner($restid)
     $statement->execute();
     $results=$statement->fetchAll();
     $statement->closeCursor();
-    return $results;
+    $allowners=array();
+    foreach($results as $owner){
+        array_push($allowners, $owner['user_id']);
+    }
+    return $allowners;
 }
 
 function addMeal($mealname, $mealprice, $mealdesc, $restid)
