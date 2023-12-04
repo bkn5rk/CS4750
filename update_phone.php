@@ -28,21 +28,19 @@ $phone_list = findPhone($_SESSION['id']);
 ?>
 <div class="container">
   <h2>Update Phone Form</h2>
-  <body> Your phone numbers </body>
-  <br>
+  <h5> Your Phone Numbers: </h5>
     <?php foreach ($phone_list as $phone): ?>
     <tr>
-    <td><?php echo "phone number: ". $phone['phone_number']; ?></td>
-    <br>
+    <td><h5><?php echo $phone['phone_number']; ?></h5></td>
     </tr>
     <?php endforeach; ?> 
   <form action="/CS4750/update_phonep2.php" method = "POST">
     <div class="form-group">
-      <label for="name">old phone_number:</label>
+      <label for="name">Old Phone Number:</label>
       <input type="phone_number_old" class="form-control" id="phone_number_old" placeholder="Enter phone_number" name="phone_number_old">
     </div>
     <div class="form-group">
-      <label for="phone_number">new phone_number:</label>
+      <label for="phone_number">New Phone Number:</label>
       <input type="phone_number" class="form-control" id="phone_number" placeholder="Enter phone_number" name="phone_number">
     </div>
     <button type="submit" class="btn btn-default">Submit</button>
