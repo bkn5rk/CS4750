@@ -56,7 +56,7 @@ include('navbar.php');
     </thead>
     <tbody>
     <?php foreach ($list_of_restaurants as $restaurant): ?>
-  <tr>
+    <tr id="<?php echo $restaurant['rest_name']?>">
      <td><a href="/CS4750/a-restaurant.php?restid=<?php echo $restaurant['restaurant_id']; ?>"><?php echo $restaurant['rest_name']; ?> </a></td>
      <td><?php echo $restaurant['location']; ?></td>
      <td><?php 
@@ -68,7 +68,7 @@ include('navbar.php');
             echo join(', ', $categories); 
           ?></td>
 
-  </tr>
+    </tr>
 <?php endforeach; ?>
     </tbody>
   </table>
@@ -80,7 +80,9 @@ $(document).ready(function(){
   $("#myInput").on("keyup", function() {
     var value = $(this).val().toLowerCase();
     $("#myDIV *").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      if ($(this).is("tr") && $(this).is("[id]")) {
+        $(this).toggle($(this).attr("id").toLowerCase().indexOf(value) > -1);
+      }
     });
   });
 });
