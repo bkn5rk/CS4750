@@ -108,7 +108,7 @@ include('navbar.php');
     <?php foreach ($reviews as $rev): ?>
   <tr>
      <td><?php echo $rev['name']; ?></td>
-     <td><?php echo $rev['rating']; ?></td>
+     <td><?php echo str_repeat("★", intval($rev['rating'])) . str_repeat("☆", 5 - intval($rev['rating'])); ?></td>
      <td><?php echo $rev['review_text']; ?></td>
      <?php if (!isset($_SESSION['username']) || $_SESSION['username'] == ''): ?>
      

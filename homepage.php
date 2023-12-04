@@ -75,8 +75,6 @@ include('navbar.php');
 </div>
 
 <div class="container">
-  <h2>Restaurant Gallery</h2>
-  <p>Click on the images to enlarge them.</p>
   <div class="row">
     <div class="col-md-4">
       <div class="thumbnail">
