@@ -44,7 +44,6 @@ include('navbar.php');
   <input class="form-control" id="myInput" type="text" placeholder="Search..">
   <br>
   <div id="myDIV">
-  <?php echo $_SESSION['username']; ?>
   <p>The restaurants in the database are listed below:</p>            
   <table class="table table-hover">
     <thead>
