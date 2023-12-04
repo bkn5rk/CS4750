@@ -29,7 +29,7 @@ require("restaurant-db.php");
   <h2>add Phone Form</h2>
   <form action="/CS4750/add_phonep2.php" method = "POST">
     <div class="form-group">
-      <label for="name">add phone_number:</label>
+      <label for="name">Add Phone Number:</label>
       <input type="phone_number" class="form-control" id="phone_number" placeholder="Enter phone_number" name="phone_number">
     </div>
 
